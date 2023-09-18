@@ -1,0 +1,18 @@
+.login-container{
+    min-height: 100vh;
+    
+    .login-content{
+        border-radius: 10px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        margin: auto;
+
+        .heading-login{
+            text-align: center;
+        }
+
+        .forgot-password{
+            text-decoration: none;
+            text-align: center;
+        }
+    }
+}

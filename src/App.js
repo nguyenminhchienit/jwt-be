@@ -1,4 +1,5 @@
 import './App.scss';
+import Login from './component/Login/Login';
 import Navigation from './component/Navigation/Navigation';
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
   
@@ -6,11 +7,12 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Login/>
+      {/* <Router>
         <Navigation/>
         <Switch>
           <Route exact path="/">
-            HOME PAGE
+            
           </Route>
           <Route path="/about">
             ABOUT
@@ -22,7 +24,7 @@ function App() {
             CONTACT US
           </Route>
         </Switch>
-      </Router>,
+      </Router> */}
     </div>
   );
 }
