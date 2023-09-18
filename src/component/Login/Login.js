@@ -1,6 +1,13 @@
 import './Login.scss'
+import { useHistory } from "react-router-dom";
 
 function Login() {
+
+    let history = useHistory();
+    const handleNewAccount = () => {
+        history.push("/register");
+    }
+
     return ( 
         <div className="login-container d-flex align-items-center justify-content-center">
             <div className="container">
@@ -13,7 +20,7 @@ function Login() {
                         <a href="/" className="forgot-password">Quên mật khẩu?</a>
                         <hr></hr>
                         <div className='create-password text-center'>
-                            <button className="btn btn-success">Tạo tài khoản</button>
+                            <button className="btn btn-success" onClick={() => handleNewAccount()}>Tạo tài khoản</button>
                         </div>
                   </div>
                 </div>
