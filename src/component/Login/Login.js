@@ -1,11 +1,44 @@
 import './Login.scss'
 import { useHistory } from "react-router-dom";
+import { loginUser } from '../../service/userService'
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 function Login() {
+    const defaultObjValid = {
+        isValidValueLogin: true,
+        isValidPassword: true,
+    }
+    
+    const [valueLogin, setValueLogin] = useState("");
+    const [password, setPassword] = useState("");
+    const [objValid,setObjValid] = useState(defaultObjValid)
 
     let history = useHistory();
     const handleNewAccount = () => {
         history.push("/register");
+    }
+
+    const handleLoginUser = async () => {
+        setObjValid(defaultObjValid);
+        if (!valueLogin) {
+            setObjValid({ ...defaultObjValid, isValidValueLogin: false })
+            toast.error("Không được để trống tên đăng nhập");
+            return;
+        }
+        if (!password) {
+            setObjValid({ ...defaultObjValid, isValidPassword: false })
+            toast.error("Không được để trống mật khẩu");
+            return;
+        }
+
+        const res = await loginUser({ valueLogin, password });
+        if (res.data.EC === 0) {
+            toast.success(res.data.EM);
+            history.push('/user')
+        } else {
+            toast.error(res.data.EM);
+        }
     }
 
     return ( 
@@ -14,9 +47,21 @@ function Login() {
                 <div className="row px-3 px-sm-0">
                     <div className="login-content col-sm-5 col-12 p-sm-5 p-2 d-flex flex-column gap-3 py-3">
                         <h3 className='heading-login'>Đăng nhập vào Takis Tech</h3>
-                        <input className="form-control" type="text" placeholder="Tên đăng nhập" />
-                        <input className="form-control" type="password" placeholder="Mật khẩu"/>
-                        <button className="btn btn-primary col-12">Đăng nhập</button>
+                        <input
+                            className={objValid.isValidValueLogin ? "form-control" : "form-control is-invalid"}
+                            type="text"
+                            placeholder="Tên đăng nhập" 
+                            value={valueLogin}
+                            onChange={(e) => setValueLogin(e.target.value)}
+                        />
+                        <input
+                            className={objValid.isValidPassword ? "form-control" : "form-control is-invalid"}
+                            type="password"
+                            placeholder="Mật khẩu" 
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button className="btn btn-primary col-12" onClick={() => handleLoginUser()}>Đăng nhập</button>
                         <a href="/" className="forgot-password">Quên mật khẩu?</a>
                         <hr></hr>
                         <div className='create-password text-center'>
