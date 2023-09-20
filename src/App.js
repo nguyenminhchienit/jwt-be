@@ -1,11 +1,9 @@
 import './App.scss';
-import Login from './component/Login/Login';
 import Navigation from './component/Navigation/Navigation';
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-import Register from './component/Resgister/Register';
+import {  BrowserRouter as Router } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import _ from 'lodash'
-import User from './component/ManageUser/User';
+import AppRoutes from './routes/AppRoutes';
+
   
 
 function App() {
@@ -18,31 +16,16 @@ function App() {
     }
   },[])
   return (
-    <div className="App">
+    <>
       <Router>
-        {account && !_.isEmpty(account) && account.isLogin && <Navigation/>}
-        <Switch>
-          <Route exact path="/">
-            HOME PAGE
-          </Route>
-          <Route path="/about">
-            ABOUT
-          </Route>
-          <Route path="/gallery">
-            GALLERY
-          </Route>
-          <Route path="/user">
-            <User/>
-          </Route>
-          <Route path="/login">
-            <Login/>
-          </Route>
-          <Route path="/register">
-            <Register/>
-          </Route>
-        </Switch>
+        <div className='app-header'>
+          <Navigation/>
+        </div>
+        <div className="app-container">         
+          <AppRoutes/>          
+        </div>
       </Router>
-    </div>
+    </>
   );
 }
 

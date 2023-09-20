@@ -1,7 +1,7 @@
 import './Login.scss'
 import { useHistory } from "react-router-dom";
 import { loginUser } from '../../service/userService'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 function Login() {
@@ -19,9 +19,16 @@ function Login() {
         history.push("/register");
     }
 
-    sessionStorage.removeItem("account");
+    useEffect(() => {
+        let data = sessionStorage.getItem("account");
+        if (data) {
+            history.push('/');
+            window.location.reload();
+        }
+    },[])
 
     const handleLoginUser = async () => {
+        alert("Click me");
         setObjValid(defaultObjValid);
         if (!valueLogin) {
             setObjValid({ ...defaultObjValid, isValidValueLogin: false })
