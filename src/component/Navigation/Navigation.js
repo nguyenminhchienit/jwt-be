@@ -8,7 +8,7 @@ function Navigation(props) {
                 <NavLink to="/" exact className='nav-item'>Home</NavLink>
                 <NavLink to= "/about" className='nav-item'>About</NavLink>
                 <NavLink to= '/gallery' className='nav-item'>Gallery</NavLink>
-                <NavLink to='/contact-us' className='nav-item'>Contact us</NavLink>
+                <NavLink to='/user' className='nav-item'>Users</NavLink>
             </div>
         </div>
      );

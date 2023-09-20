@@ -19,6 +19,8 @@ function Login() {
         history.push("/register");
     }
 
+    sessionStorage.removeItem("account");
+
     const handleLoginUser = async () => {
         setObjValid(defaultObjValid);
         if (!valueLogin) {
@@ -35,7 +37,15 @@ function Login() {
         const res = await loginUser({ valueLogin, password });
         if (res.data.EC === 0) {
             toast.success(res.data.EM);
+            let data = {
+                isLogin: true,
+                token: "FAKE TOKEN"
+            }
+            sessionStorage.setItem("account", JSON.stringify(data));
+
             history.push('/user')
+
+            window.location.reload();
         } else {
             toast.error(res.data.EM);
         }
