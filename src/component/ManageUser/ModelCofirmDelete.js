@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 function ModelConfirmDelete(props) {
     return ( 
         <>
-            <Modal show={props.show} onHide={props.handleClose}>
+            <Modal show={props.show} onHide={props.handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Thông báo</Modal.Title>
                 </Modal.Header>

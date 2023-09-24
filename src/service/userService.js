@@ -20,10 +20,15 @@ const deleteUser = (user) => {
     return axios.delete("http://localhost:8080/api/v1/user/delete",{data: {id: user.id}})
 }
 
+const createUser = (data) => {
+    return axios.post("http://localhost:8080/api/v1/user/create",data)
+}
+
 export {
     registerNewUser,
     loginUser,
     getAllUser,
     getUserWithPagination,
-    deleteUser
+    deleteUser,
+    createUser
 }

@@ -3,6 +3,7 @@ import { getUserWithPagination,deleteUser } from "../../service/userService";
 import ReactPaginate from 'react-paginate';
 import { toast } from 'react-toastify';
 import ModelConfirmDelete from "./ModelCofirmDelete";
+import ModalUser from "./ModalUser";
 
 function User() {
     const [listUser, setListUser] = useState([]);
@@ -10,6 +11,7 @@ function User() {
     const [currentLimit, setCurrentLimit] = useState(2);
     const [totalPage, setTotalPage] = useState(0);
     const [isShowModal, setIsShowModal] = useState(false);
+    const [isShowModalUser, setIsShowModalUser] = useState(false);
     const [dataModal, setDataModal] = useState({})
 
     useEffect(() => {
@@ -45,6 +47,14 @@ function User() {
         }
     }
 
+    const handleShowModalUser = () => {
+        setIsShowModalUser(true);
+    }
+
+    const handleCloseModalUser = () => {
+        setIsShowModalUser(false);
+    }
+
     const handleClose = () => {
         setIsShowModal(false)
     }
@@ -53,7 +63,11 @@ function User() {
         <>
             <div className="manage-user-container">
                 <div className="container">
-                    <div className="container-table-user mt-5">
+                    <div className="my-3">
+                        <button className="btn btn-primary me-2" onClick={() => handleShowModalUser()}>Thêm</button>
+                        <button className="btn btn-success">Refresh</button>
+                    </div>
+                    <div className="container-table-user">
                         <table className="table table-hover table-bordered">
                             <thead>
                                 <tr>
@@ -122,6 +136,12 @@ function User() {
                 handleClose={handleClose}
                 handleConfirmDelete={handleConfirmDelete}  
                 user={dataModal}
+            />
+
+            <ModalUser
+                show={isShowModalUser}
+                handleClose={handleCloseModalUser}
+                title="Thêm người dùng"
             />
         </>
      );
