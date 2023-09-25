@@ -8,11 +8,13 @@ import ModalUser from "./ModalUser";
 function User() {
     const [listUser, setListUser] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [currentLimit, setCurrentLimit] = useState(2);
+    const [currentLimit, setCurrentLimit] = useState(5);
     const [totalPage, setTotalPage] = useState(0);
     const [isShowModal, setIsShowModal] = useState(false);
     const [isShowModalUser, setIsShowModalUser] = useState(false);
     const [dataModal, setDataModal] = useState({})
+    const [actionModalUser, setActionModalUser] = useState("");
+
 
     useEffect(() => {
         fetchUser();
@@ -48,15 +50,27 @@ function User() {
     }
 
     const handleShowModalUser = () => {
+        setActionModalUser("CREATE");
         setIsShowModalUser(true);
     }
 
-    const handleCloseModalUser = () => {
+    const handleCloseModalUser = async () => {
         setIsShowModalUser(false);
+        await fetchUser();
     }
 
     const handleClose = () => {
         setIsShowModal(false)
+    }
+
+    const handleUpdateUser = (user) => {
+        setActionModalUser("EDIT")
+        setDataModal(user);
+        setIsShowModalUser(true);
+    }
+
+    const handleRefresh = async () => {
+        await fetchUser();
     }
 
     return (
@@ -65,7 +79,7 @@ function User() {
                 <div className="container">
                     <div className="my-3">
                         <button className="btn btn-primary me-2" onClick={() => handleShowModalUser()}>Thêm</button>
-                        <button className="btn btn-success">Refresh</button>
+                        <button className="btn btn-success" onClick={() => handleRefresh()}>Refresh</button>
                     </div>
                     <div className="container-table-user">
                         <table className="table table-hover table-bordered">
@@ -83,12 +97,15 @@ function User() {
                                     listUser.map((item, index) => {
                                         return (
                                             <tr key={index}>
-                                                <td>{index + 1}</td>
+                                                <td>{(currentPage - 1) * currentLimit + index + 1}</td>
                                                 <td>{item.email}</td>
                                                 <td>{item.username}</td>
                                                 <td>{item.Group ? item.Group.name : ''}</td>
                                                 <td>
-                                                    <button className="btn btn-warning btn-edit me-2">Sửa</button>
+                                                    <button
+                                                        className="btn btn-warning btn-edit me-2"
+                                                        onClick={() => handleUpdateUser(item)}
+                                                    >Sửa</button>
                                                     <button
                                                         className="btn btn-danger btn-delete"
                                                         onClick={() => handleDeleteUser(item)}
@@ -141,7 +158,8 @@ function User() {
             <ModalUser
                 show={isShowModalUser}
                 handleClose={handleCloseModalUser}
-                title="Thêm người dùng"
+                action={actionModalUser}
+                user={dataModal}
             />
         </>
      );
