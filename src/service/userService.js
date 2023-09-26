@@ -1,31 +1,31 @@
-import axios from "axios";
+import axios from "../setup/axios";
 
 const registerNewUser = (data) => {
-    return axios.post("http://localhost:8080/api/v1/register",data)
+    return axios.post("/register",data)
 }
 
 const loginUser = (data) => {
-    return axios.post("http://localhost:8080/api/v1/login",data)
+    return axios.post("/login",data)
 }
 
 const getAllUser = (data) => {
-    return axios.get("http://localhost:8080/api/v1/user/read")
+    return axios.get("/user/read")
 }
 
 const getUserWithPagination = (page,limit) => {
-    return axios.get(`http://localhost:8080/api/v1/user/read?page=${page}&limit=${limit}`)
+    return axios.get(`/user/read?page=${page}&limit=${limit}`)
 }
 
 const deleteUser = (user) => {
-    return axios.delete("http://localhost:8080/api/v1/user/delete",{data: {id: user.id}})
+    return axios.delete("/user/delete",{data: {id: user.id}})
 }
 
 const createUser = (data) => {
-    return axios.post("http://localhost:8080/api/v1/user/create",data)
+    return axios.post("/user/create",data)
 }
 
 const updateUser = (data) => {
-    return axios.put("http://localhost:8080/api/v1/user/update",data)
+    return axios.put("/user/update",data)
 }
 
 export {

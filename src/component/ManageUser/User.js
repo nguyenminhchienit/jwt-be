@@ -22,9 +22,9 @@ function User() {
     
     const fetchUser = async () => {
         let res = await getUserWithPagination(currentPage, currentLimit);
-        if (res && res.data && res.data.EC === 0) {
-            setListUser(res.data.DT.users);
-            setTotalPage(res.data.DT.totalPage);
+        if (res && res.EC === 0) {
+            setListUser(res.DT.users);
+            setTotalPage(res.DT.totalPage);
         }
     }
 
@@ -39,12 +39,12 @@ function User() {
 
     const handleConfirmDelete = async () => {
         let res = await deleteUser(dataModal);
-        if (res && res.data && res.data.EC === 0) {
-            toast.success(res.data.EM);
+        if (res && res.EC === 0) {
+            toast.success(res.EM);
             setIsShowModal(false);
             await fetchUser();
         } else {
-            toast.error(res.data.EM);
+            toast.error(res.EM);
             setDataModal({});
         }
     }

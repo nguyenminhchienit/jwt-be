@@ -15,12 +15,11 @@ function Register() {
     const handleLogin = async () => {
         const userData = { email, phone, username, password }
         let res = await registerNewUser(userData);
-        console.log(res);
-        if (res.data.EC === 0) {
-            toast.success(res.data.EM);
+        if (res.EC === 0) {
+            toast.success(res.EM);
             history.push("/login");
         } else {
-            toast.error(res.data.EM);
+            toast.error(res.EM);
         }
     }
 

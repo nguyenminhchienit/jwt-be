@@ -42,8 +42,8 @@ function Login() {
         }
 
         const res = await loginUser({ valueLogin, password });
-        if (res.data.EC === 0) {
-            toast.success(res.data.EM);
+        if (res.EC === 0) {
+            toast.success(res.EM);
             let data = {
                 isLogin: true,
                 token: "FAKE TOKEN"
@@ -54,7 +54,7 @@ function Login() {
 
             window.location.reload();
         } else {
-            toast.error(res.data.EM);
+            toast.error(res.EM);
         }
     }
 
