@@ -4,6 +4,8 @@ const instance = axios.create({
     baseURL: "http://localhost:8080/api/v1",
 });
 
+instance.defaults.withCredentials = true;
+
 // Add a request interceptor
 instance.interceptors.request.use(function (config) {
     // Do something before request is sent
