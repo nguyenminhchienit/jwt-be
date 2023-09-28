@@ -3,28 +3,40 @@ import Navigation from './component/Navigation/Navigation';
 import {  BrowserRouter as Router } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import AppRoutes from './routes/AppRoutes';
-
+import { Dna } from 'react-loader-spinner'
+import { useContext } from 'react';
+import { UseContext } from './context/UseContext';
   
 
 function App() {
-  const [account, setAccount] = useState({})
 
-  useEffect(() => {
-    let data = sessionStorage.getItem("account");
-    if (data) {
-      setAccount(JSON.parse(data));
-    }
-  },[])
+  const { user } = useContext(UseContext);
   return (
     <>
-      <Router>
-        <div className='app-header'>
-          <Navigation/>
+      {user && user.isLoading === true ?
+        <div className='loading-app'>
+          <Dna
+            visible={true}
+            height="100"
+            width="100"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper"
+          />
+          <div className='loading-text'>Loading...</div>
         </div>
-        <div className="app-container">         
-          <AppRoutes/>          
-        </div>
-      </Router>
+        :
+        <>
+          <Router>
+            <div className='app-header'>
+              <Navigation/>
+            </div>
+            <div className="app-container">         
+              <AppRoutes/>          
+            </div>
+          </Router>
+        </>
+      }
     </>
   );
 }

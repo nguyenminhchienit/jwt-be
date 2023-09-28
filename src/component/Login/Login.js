@@ -1,10 +1,14 @@
 import './Login.scss'
 import { useHistory } from "react-router-dom";
 import { loginUser } from '../../service/userService'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { UseContext } from '../../context/UseContext';
 
 function Login() {
+    //hook useContext
+    const { loginContext } = useContext(UseContext);
+
     const defaultObjValid = {
         isValidValueLogin: true,
         isValidPassword: true,
@@ -19,16 +23,7 @@ function Login() {
         history.push("/register");
     }
 
-    useEffect(() => {
-        let data = sessionStorage.getItem("account");
-        if (data) {
-            history.push('/');
-            window.location.reload();
-        }
-    },[])
-
     const handleLoginUser = async () => {
-        alert("Click me");
         setObjValid(defaultObjValid);
         if (!valueLogin) {
             setObjValid({ ...defaultObjValid, isValidValueLogin: false })
@@ -40,19 +35,25 @@ function Login() {
             toast.error("Không được để trống mật khẩu");
             return;
         }
-
+            
         const res = await loginUser({ valueLogin, password });
-        if (res.EC === 0) {
+        if (res && res.EC === 0) {
             toast.success(res.EM);
             let data = {
-                isLogin: true,
-                token: "FAKE TOKEN"
+                isAuthenticate: true,
+                token: res.DT.access_token,
+                account: {
+                    groupWithRoles: res.DT.groupWithRoles,
+                    email: res.DT.email,
+                    username: res.DT.username
+                }
             }
-            sessionStorage.setItem("account", JSON.stringify(data));
+            //useContext
+            loginContext(data);
 
             history.push('/user')
 
-            window.location.reload();
+            // window.location.reload();
         } else {
             toast.error(res.EM);
         }

@@ -28,6 +28,10 @@ const updateUser = (data) => {
     return axios.put("/user/update",data)
 }
 
+const getUserAccount = () => {
+    return axios.get("/account")
+}
+
 export {
     registerNewUser,
     loginUser,
@@ -35,5 +39,6 @@ export {
     getUserWithPagination,
     deleteUser,
     createUser,
-    updateUser
+    updateUser,
+    getUserAccount
 }
