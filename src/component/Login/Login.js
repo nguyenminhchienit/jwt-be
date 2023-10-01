@@ -1,7 +1,7 @@
 import './Login.scss'
 import { useHistory } from "react-router-dom";
 import { loginUser } from '../../service/userService'
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import { UseContext } from '../../context/UseContext';
 

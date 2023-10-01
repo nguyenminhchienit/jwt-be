@@ -1,42 +1,33 @@
   .nav-container{
-    background: #1E1F25;
 
+    .navbar{
+      display: flex !important;
+      justify-content: space-between !important;
+    }
     .nav-list{
         display: flex;
-        height: 80px;
-        min-width: 100px;
         align-items: center;
         list-style: none;
 
         .nav-item {
-            padding: 1rem 2rem 1.15rem;
             text-transform: uppercase;
             cursor: pointer;
-            color: #ebebeb;
+            color: gray;
             min-width: 80px;
-            margin: auto;
             text-decoration: none;
             width: 180px;
-            text-align: center;
           }
           
           .nav-item:hover {
-            background-image: url('https://scottyzen.sirv.com/Images/v/button.png');
-            background-size: 100% 100%;
-            color: #27262c;
-            animation: spring 300ms ease-out;
-            text-shadow: 0 -1px 0 #ef816c;
+            color: #0652DD;
             font-weight: bold;
+            transition: all 0.1s ease-in-out;
           }
 
           .nav-item.active {
-            transform: translateY(4px);
-            background-image: url('https://scottyzen.sirv.com/Images/v/button.png');
-            background-size: 100% 100%;
-            color: #27262c;
-            animation: spring 300ms ease-out;
-            text-shadow: 0 -1px 0 #ef816c;
+            color: #0652DD;
             font-weight: bold;
+            transition: all 0.1s ease-in-out;
           }
 
           @keyframes spring {
@@ -57,6 +48,12 @@
               -webkit-transform: scale(1, 1);
             }
           }
+      }
+
+      .nav-link{
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
       }
   }
   
