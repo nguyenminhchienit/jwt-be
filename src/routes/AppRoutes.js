@@ -3,6 +3,7 @@ import { Route, Switch} from "react-router-dom";
 import Register from '../component/Register/Register';
 import User from '../component/ManageUser/User';
 import PrivateRoutes from './PrivateRoutes';
+import Role from '../component/Role/Role';
 
 function AppRoutes() {
     return ( 
@@ -11,9 +12,9 @@ function AppRoutes() {
                 <Route exact path="/">
                     HOME PAGE
                 </Route>
-                <Route path="/about">
-                    ABOUT
-                </Route>
+                
+                <PrivateRoutes path='/role' component={Role} />
+                
                 <Route path="/gallery">
                     GALLERY
                 </Route>

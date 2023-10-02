@@ -34,14 +34,14 @@ function Navigation(props) {
                     <Navbar.Collapse id="basic-navbar-nav" className='navbar'>
                         <Nav className="nav-list">
                             <NavLink to="/" exact className='nav-item'>Home</NavLink>
-                            <NavLink to= "/about" className='nav-item'>About</NavLink>
+                            <NavLink to= "/role" className='nav-item'>Role</NavLink>
                             <NavLink to= '/gallery' className='nav-item'>Gallery</NavLink>
                             <NavLink to='/user' className='nav-item'>Users</NavLink>
                         </Nav>
                         {(user && user.isAuthenticate === true) && 
                             <Nav className='nav-link'>
-                                <Nav.Item href="#home">Welcome, {user.account.username}</Nav.Item>
-                                <NavDropdown title="Cài đặt" id="basic-nav-dropdown">
+                                <Nav.Item href="#home">Chào, {user.account.username}</Nav.Item>
+                                <NavDropdown title="Thông tin" id="basic-nav-dropdown">
                                     <NavDropdown.Item >Thông tin cá nhân</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item >
